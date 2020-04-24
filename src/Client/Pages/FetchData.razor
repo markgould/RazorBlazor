@@ -1,0 +1,60 @@
+@page "/fetchdata"
+@using WebApplication1.Shared
+@using WebApplication1.Client.Infrastructure
+@inject HttpClient HttpClient
+@inject NavigationManager MyNavigationManager
+@inject IJsInterop JSInterop
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (_forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+            <th>Summary</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var forecast in _forecasts)
+        {
+            <tr>
+                <td>@forecast.Date.ToShortDateString()</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.Summary</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <a href="javascript:void(0)" class="btn btn-success" @onclick="PostBack">Post</a>
+    </div>
+}
+
+@code {
+    private WeatherForecast[] _forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        _forecasts = await HttpClient.GetFromJsonAsync<WeatherForecast[]>("Weather");
+    }
+
+    public async Task PostBack()
+    {
+        var response = await HttpClient.PostAsJsonAsync("Weather", _forecasts);
+        var value = await response.Content.ReadAsStringAsync();
+        await JSInterop.ShowAlert(value);
+    }
+}
