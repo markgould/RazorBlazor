@@ -1,4 +1,4 @@
-@page "/fetchdata"
+@page "/Weather/"
 @using WebApplication1.Shared
 @using WebApplication1.Client.Infrastructure
 @inject HttpClient HttpClient
@@ -47,13 +47,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-
-        _forecasts = await HttpClient.GetFromJsonAsync<WeatherForecast[]>("Weather");
+        _forecasts = await HttpClient.GetFromJsonAsync<WeatherForecast[]>("Weather/WeatherData");
     }
 
     public async Task PostBack()
     {
-        var response = await HttpClient.PostAsJsonAsync("Weather", _forecasts);
+        var response = await HttpClient.PostAsJsonAsync("Weather/WeatherData", _forecasts);
         var value = await response.Content.ReadAsStringAsync();
         await JSInterop.ShowAlert(value);
     }

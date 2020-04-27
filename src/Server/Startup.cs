@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 using WebApplication1.Server.Infrastructure;
 
 namespace WebApplication1.Server
@@ -51,7 +48,7 @@ namespace WebApplication1.Server
 
             app.UseHttpsRedirection();
             app.UseMiddleware<CsrfTokenCookieMiddleware>();
-            app.UseBlazorFrameworkFiles("/BlazorDemo");
+            app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

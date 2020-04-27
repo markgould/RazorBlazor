@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+
+<div>@RenderBody()</div>
+
+<app>Loading...</app>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+<script src="@Href("~/site.js")"></script>
+<script  src="@Href("~/_framework/blazor.webassembly.js")"></script>

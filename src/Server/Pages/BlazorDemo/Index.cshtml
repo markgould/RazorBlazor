@@ -1,20 +1,9 @@
 ﻿@page "{handler?}"
 @model WebApplication1.Server.Pages.BlazorDemo.IndexPageModel
 @{
+    Layout = "~/Pages/Shared/_BlazorLayout.cshtml";
 }
-<base href="~/BlazorDemo/" />
 
 <h1>This is a Razor page!</h1>
 
 @Html.Raw("<p>Let's see if we can embed a Blazor WASM page...</p>")
-
-<app>Loading...</app>
-
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
-
-<script src="~/BlazorDemo/site.js"></script>
-<script src="~/BlazorDemo/_framework/blazor.webassembly.js"></script>
